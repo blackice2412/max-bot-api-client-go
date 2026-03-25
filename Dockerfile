@@ -3,7 +3,7 @@ FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
 
-COPY go.mod go.sum ./
+COPY go.mod ./
 RUN go mod download
 
 COPY . .
@@ -16,7 +16,5 @@ FROM alpine:3.21
 RUN apk add --no-cache ca-certificates
 
 COPY --from=builder /bot /bot
-
-ENV BOT_TOKEN=""
 
 ENTRYPOINT ["/bot"]
